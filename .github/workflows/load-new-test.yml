@@ -4,8 +4,10 @@ jobs: # jobs a serem realizados, posso ter varios
   k6_local_test: 
     name: k6 Load Test
     runs-on: ubuntu-latest
-    permissions: 
-      contents: write 
+    
+    permissions:
+      issues: write
+      pull-requests: write
 
     steps:
       - name: step 1 - checkout
