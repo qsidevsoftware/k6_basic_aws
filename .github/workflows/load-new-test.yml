@@ -8,6 +8,9 @@ jobs: # jobs a serem realizados, posso ter varios
   k6_local_test: 
     name: k6 Load Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
 
     steps:
       - name: step 1 - checkout
@@ -20,6 +23,8 @@ jobs: # jobs a serem realizados, posso ter varios
 
       - name: step 3 - move repot to report folder
         run: ls & mkdir report & mv index.html report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: stpe 4 - upload arctifact
         uses: actions/upload-artifact@v4.3.1  
@@ -30,6 +35,5 @@ jobs: # jobs a serem realizados, posso ter varios
       - name: step 5 - publish report
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: main
           publish_dir: report
