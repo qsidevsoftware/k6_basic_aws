@@ -6,8 +6,8 @@ jobs: # jobs a serem realizados, posso ter varios
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write
-      pages: write
+      contents: read
+      pages: write          # <-- Add this line
 
 
 
