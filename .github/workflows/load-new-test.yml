@@ -1,0 +1,24 @@
+on: [push]  # gatilho da realzaçao da action, ou seja ao realizar um push para brnach
+
+jobs: # jobs a serem realizados, posso ter varios 
+  k6_local_test: 
+    name: k6 Load Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: step 1 - checkout
+        uses: actions/checkout@v1
+
+      - name: step 2 - run k6 load test
+        uses: grafana/k6-action@v0.2.0
+        with:
+          filename: scripts/test.js
+
+      - name: step 3 - move repot to report folder
+        run: ls & mkdir report & mv index.html report
+
+      - name: stpe 4 - upload arctifact
+        uses: actions/upload-artifact@v4.3.1  
+        with: 
+          name: relatorio de testes de performance  # nome do relatorio
+          path: report #path do relatorio
