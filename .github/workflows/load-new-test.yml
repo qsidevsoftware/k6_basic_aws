@@ -1,8 +1,10 @@
 on: [push]  # gatilho da realzaçao da action, ou seja ao realizar um push para brnach
-permissions: 
-  contents: write 
+
 jobs: # jobs a serem realizados, posso ter varios 
   k6_local_test: 
+    permissions: 
+    contents: write 
+    
     name: k6 Load Test
     runs-on: ubuntu-latest
 
