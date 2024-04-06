@@ -1,5 +1,6 @@
 on: [push]  # gatilho da realzaçao da action, ou seja ao realizar um push para brnach
-
+permissions: 
+  contents: write 
 jobs: # jobs a serem realizados, posso ter varios 
   k6_local_test: 
     name: k6 Load Test
@@ -22,3 +23,16 @@ jobs: # jobs a serem realizados, posso ter varios
         with: 
           name: relatorio de testes de performance  # nome do relatorio
           path: report #path do relatorio
+
+      - name: stpe 4 - upload arctifact
+        uses: actions/upload-artifact@v4.3.1  
+        with: 
+          name: relatorio de testes de performance  # nome do relatorio
+          path: report #path do relatorio
+
+      - name: step 5 - publish report
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: report
